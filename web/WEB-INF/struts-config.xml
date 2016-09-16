@@ -1,0 +1,130 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<!DOCTYPE struts-config PUBLIC
+          "-//Apache Software Foundation//DTD Struts Configuration 1.2//EN"
+          "http://jakarta.apache.org/struts/dtds/struts-config_1_2.dtd">
+
+
+<struts-config>
+    <form-beans>
+        <form-bean name="Sale_shares_Bean" type="AppPack.Sale_shares_Bean"/>
+        <form-bean name="Change_share_rate_Bean" type="AppPack.Change_share_rate_Bean"/>
+        <form-bean name="Event_login_Bean" type="AppPack.Event_login_Bean"/>
+        <form-bean name="Buy_shares_Bean" type="AppPack.Buy_shares_Bean"/>
+        <form-bean name="Group_reg_Bean" type="AppPack.Group_reg_Bean"/>
+        <form-bean name="Event_reg_Bean" type="AppPack.Event_reg_Bean"/>
+        <form-bean name="Faculty_reg_Bean" type="AppPack.Faculty_reg_Bean"/>
+        <form-bean name="Login_Action_Bean" type="AppPack.Login_Action_Bean"/>
+    
+    </form-beans>
+    
+    <global-exceptions>
+    
+    </global-exceptions>
+
+    <global-forwards>
+        <forward name="welcome"  path="/Welcome.php"/>
+    </global-forwards>
+
+    <action-mappings>
+        
+        <action path="/home" type="AppPack.Login_Session_Verify_Action">
+            <forward name="success" path="/home.jsp" />
+            <forward name="user_home" path="/user_home.jsp" />
+        </action>
+        <action input="/home.jsp" name="Login_Action_Bean" path="/login_action" scope="session" type="AppPack.Login_Action">
+            <forward name="success" path="/user_home.jsp" />
+        </action>
+        <action input="/faculty_reg.jsp" name="Faculty_reg_Bean" path="/faculty_reg_action" scope="request" type="AppPack.Faculty_reg_Action">
+            <forward name="success" path="/user_home.jsp" />
+        </action>
+        <action input="/event_reg.jsp" name="Event_reg_Bean" path="/event_reg_action" scope="request" type="AppPack.Event_reg_Action">
+            <forward name="success" path="/home.jsp" />
+        </action>
+        <action input="/group_reg.jsp" name="Group_reg_Bean" path="/group_reg_action" scope="request" type="AppPack.Group_reg_Action">
+            <forward name="success" path="/user_home.jsp" />
+        </action>
+        <action input="/user_home.jsp" path="/sale" type="AppPack.Sale_Action">
+            <forward name="success" path="/sale.jsp" />
+        </action>
+        <action input="/user_home.jsp" path="/buy" type="AppPack.Buy_Action">
+            <forward name="success" path="/buy.jsp" />
+        </action>
+        <action name="Buy_shares_Bean" path="/buy_shares_action" scope="session" type="AppPack.Buy_shares_Action">
+            <forward name="success" path="/user_home.jsp" />
+        </action>
+
+
+        <action path="/logout" type="AppPack.Logout">
+        <forward name="success" path="/home.jsp" />    
+        </action>
+
+        <action path="/faculty_reg" forward="/faculty_reg.jsp" />
+        <action path="/event_reg" forward="/event_reg.jsp" />
+        <action path="/group_reg" forward="/group_reg.jsp" />
+
+        <action path="/user_home" forward="/user_home.jsp" />
+        <action path="/event_login_page" type="AppPack.Login_Session_Verify_Action">
+            <forward name="success" path="/event_login.jsp" />
+            <forward name="user_home" path="/user_home.jsp" />
+        </action>
+        <action input="/event_login.jsp" name="Event_login_Bean" path="/event_login_action" scope="request" type="AppPack.Event_login_Action">
+            <forward name="success" path="/event_home.jsp" />
+        </action>
+
+        <action input="/event_home.jsp" name="Change_share_rate_Bean" path="/change_share_rate_action" scope="request" type="AppPack.Change_share_rate_Action">
+            <forward name="success" path="/event_home.jsp" />
+        </action>
+
+
+        <action input="/sale.jsp" name="Sale_shares_Bean" path="/sale_shares_action" scope="request" type="AppPack.Sale_shares_Action" validate="true">
+            <forward name="success" path="/user_home.jsp" />
+        </action>
+
+
+    </action-mappings>
+    
+    <controller processorClass="org.apache.struts.tiles.TilesRequestProcessor"/>
+
+    <message-resources parameter="com/myapp/struts/ApplicationResource"/>    
+    
+    <!-- ========================= Tiles plugin ===============================-->
+    <!--
+    This plugin initialize Tiles definition factory. This later can takes some
+    parameters explained here after. The plugin first read parameters from
+    web.xml, thenoverload them with parameters defined here. All parameters
+    are optional.
+    The plugin should be declared in each struts-config file.
+    - definitions-config: (optional)
+    Specify configuration file names. There can be several comma
+    separated file names (default: ?? )
+    - moduleAware: (optional - struts1.1)
+    Specify if the Tiles definition factory is module aware. If true
+    (default), there will be one factory for each Struts module.
+    If false, there will be one common factory for all module. In this
+    later case, it is still needed to declare one plugin per module.
+    The factory will be initialized with parameters found in the first
+    initialized plugin (generally the one associated with the default
+    module).
+    true : One factory per module. (default)
+    false : one single shared factory for all modules
+    - definitions-parser-validate: (optional)
+    Specify if xml parser should validate the Tiles configuration file.
+    true : validate. DTD should be specified in file header (default)
+    false : no validation
+
+    Paths found in Tiles definitions are relative to the main context.
+    -->
+    <plug-in className="org.apache.struts.tiles.TilesPlugin" >
+        <set-property property="definitions-config" value="/WEB-INF/tiles-defs.xml" />      
+        <set-property property="moduleAware" value="true" />
+    </plug-in>
+    
+    <!-- ========================= Validator plugin ================================= -->
+    <plug-in className="org.apache.struts.validator.ValidatorPlugIn">
+        <set-property
+            property="pathnames"
+            value="/WEB-INF/validator-rules.xml,/WEB-INF/validation.xml"/>
+    </plug-in>
+  
+</struts-config>

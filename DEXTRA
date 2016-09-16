@@ -1,0 +1,149 @@
+-- MySQL Administrator dump 1.4
+--
+-- ------------------------------------------------------
+-- Server version	5.1.45-community
+
+
+/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
+/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
+/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
+/*!40101 SET NAMES utf8 */;
+
+/*!40014 SET @OLD_UNIQUE_CHECKS=@@UNIQUE_CHECKS, UNIQUE_CHECKS=0 */;
+/*!40014 SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0 */;
+/*!40101 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='NO_AUTO_VALUE_ON_ZERO' */;
+
+
+--
+-- Create schema dextramarket
+--
+
+CREATE DATABASE IF NOT EXISTS dextramarket;
+USE dextramarket;
+
+--
+-- Definition of table `event`
+--
+
+DROP TABLE IF EXISTS `event`;
+CREATE TABLE `event` (
+  `event_id` varchar(50) NOT NULL,
+  `share_remaining` varchar(20) NOT NULL DEFAULT '500',
+  `rate` varchar(20) NOT NULL,
+  `email` varchar(45) NOT NULL,
+  `password` varchar(45) NOT NULL,
+  PRIMARY KEY (`event_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `event`
+--
+
+/*!40000 ALTER TABLE `event` DISABLE KEYS */;
+INSERT INTO `event` (`event_id`,`share_remaining`,`rate`,`email`,`password`) VALUES 
+ ('event 1','495','20','event@gmail.com','1234'),
+ ('event 2','485','140','event2@gmail.com','1234'),
+ ('event3','505','120','event3@gmail.com','1234');
+/*!40000 ALTER TABLE `event` ENABLE KEYS */;
+
+
+--
+-- Definition of table `faculty`
+--
+
+DROP TABLE IF EXISTS `faculty`;
+CREATE TABLE `faculty` (
+  `name` varchar(50) NOT NULL,
+  `email` varchar(45) NOT NULL,
+  `balance` varchar(20) NOT NULL DEFAULT '14000',
+  PRIMARY KEY (`email`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `faculty`
+--
+
+/*!40000 ALTER TABLE `faculty` DISABLE KEYS */;
+/*!40000 ALTER TABLE `faculty` ENABLE KEYS */;
+
+
+--
+-- Definition of table `user_group`
+--
+
+DROP TABLE IF EXISTS `user_group`;
+CREATE TABLE `user_group` (
+  `id` varchar(45) NOT NULL,
+  `name1` varchar(45) NOT NULL,
+  `name2` varchar(45) DEFAULT NULL,
+  `email1` varchar(45) NOT NULL,
+  `email2` varchar(45) DEFAULT NULL,
+  `balance` varchar(45) NOT NULL DEFAULT '14000',
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `user_group`
+--
+
+/*!40000 ALTER TABLE `user_group` DISABLE KEYS */;
+INSERT INTO `user_group` (`id`,`name1`,`name2`,`email1`,`email2`,`balance`) VALUES 
+ ('ajay1','ajay','','ajay@gmail.com','','11700');
+/*!40000 ALTER TABLE `user_group` ENABLE KEYS */;
+
+
+--
+-- Definition of table `user_login`
+--
+
+DROP TABLE IF EXISTS `user_login`;
+CREATE TABLE `user_login` (
+  `id` varchar(50) NOT NULL,
+  `password` varchar(45) NOT NULL,
+  `type` varchar(45) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `user_login`
+--
+
+/*!40000 ALTER TABLE `user_login` DISABLE KEYS */;
+INSERT INTO `user_login` (`id`,`password`,`type`) VALUES 
+ ('ajay1','123','group');
+/*!40000 ALTER TABLE `user_login` ENABLE KEYS */;
+
+
+--
+-- Definition of table `user_share_detail`
+--
+
+DROP TABLE IF EXISTS `user_share_detail`;
+CREATE TABLE `user_share_detail` (
+  `id` varchar(50) NOT NULL,
+  `event_id` varchar(45) NOT NULL,
+  `share_count` varchar(20) NOT NULL DEFAULT '0',
+  `rate` varchar(20) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `user_share_detail`
+--
+
+/*!40000 ALTER TABLE `user_share_detail` DISABLE KEYS */;
+INSERT INTO `user_share_detail` (`id`,`event_id`,`share_count`,`rate`) VALUES 
+ ('ajay1','event 1','10','20'),
+ ('ajay1','event 2','25','140'),
+ ('ajay1','event3','10','120');
+/*!40000 ALTER TABLE `user_share_detail` ENABLE KEYS */;
+
+
+
+
+/*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
+/*!40014 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS */;
+/*!40014 SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS */;
+/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
+/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
+/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
+/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
